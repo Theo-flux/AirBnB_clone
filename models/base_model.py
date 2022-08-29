@@ -34,7 +34,7 @@ class BaseModel:
         """ Returns a dictionary containing all keys/values
         of the instance
         """
-        toDict = self.__dict__.copy()
+        toDict = self.__dict__
         toDict["created_at"] = self.created_at.isoformat()
         toDict["updated_at"] = self.updated_at.isoformat()
         toDict["__class__"] = self.__class__.__name__
