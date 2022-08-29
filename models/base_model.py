@@ -11,6 +11,7 @@ from uuid import uuid4
 from datetime import datetime
 import json
 
+
 class BaseModel:
     """ A representation of BaseModel class """
 
