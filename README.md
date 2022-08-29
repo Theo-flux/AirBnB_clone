@@ -6,19 +6,19 @@ AirBnB clone is an ALX project to build an application similar tothe popular Air
 - [models](./models):
 This directory contains all classes used for the entire project. A class, called "model" in a OOP project is the representation of an object/instance.
 
-- [tests](https://www.github.com/Theo-flux/AirBnB_clone/tests):
+- [tests](./tests):
 This directory contains all unit tests.
 
-- [console.py](https://www.github.com/Theo-flux/AirBnB_clone/console.py):
+- [console.py](./console.py):
 console.py file is the entry point of our command interpreter
 
-- [models/base_model.py](https://www.github.com/Theo-flux/AirBnB/models/base_model.py):
+- [models/base_model.py](./models/base_model.py):
 This file is the base class of all our models. It contains common elements:
 	- attributes: id, created_at and updated_at
 	- methods: save() and to_json()
 
-- [models/engine](https://www.github.com/Theo-flux/AirBnB/models/engine):
-This directory contains all storage classes (using the same prototype). For the moment, it contains onlt the [file_storage.py](https://www.github.com/Theo-flux/AirBnB/models/engine/file_storage.py) file.
+- [models/engine](./models/engine):
+This directory contains all storage classes (using the same prototype). For the moment, it contains onlt the [file_storage.py](./models/engine/file_storage.py) file.
 
 ## The console:
 1. create your data model
@@ -30,4 +30,4 @@ The first piece is to manipulate a powerful storage system. This storage engine 
 This abstraction will also allow you to change the type of storage easily without updating all of your codebase.
 
 The console will be a tool to validate this storage engine
-![server-side(storage engine)](https://s3.amazonaws.com/alx-intranet.hbtn.io/uploads/medias/2018/6/815046647d23428a14ca.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIARDDGGGOUSBVO6H7D%2F20220829%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220829T092318Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=182421f71096234692d25220295322a9763d9aec7ae33c055d9f5cb24bbf920a)
+![server-side(storage engine)]()
