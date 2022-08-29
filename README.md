@@ -3,7 +3,7 @@
 AirBnB clone is an ALX project to build an application similar tothe popular Airbnb. This application will be completed in milestones (steps) and each step will link to a concept:
 
 ## Files and Directories
-- [models](https://www.github.com/Theo-flux/AirBnB_clone/models):
+- [models](./models):
 This directory contains all classes used for the entire project. A class, called "model" in a OOP project is the representation of an object/instance.
 
 - [tests](https://www.github.com/Theo-flux/AirBnB_clone/tests):
