@@ -46,3 +46,6 @@ This abstraction will also allow you to change the type of storage easily withou
 
 The console will be a tool to validate this storage engine
 ![server-side(storage engine)]()
+
+## References
+1. [Python strftime cheatsheet](https://strftime.org/)
