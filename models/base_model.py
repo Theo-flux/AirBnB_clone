@@ -15,12 +15,23 @@ import json
 class BaseModel:
     """ A representation of BaseModel class """
 
-    def __init__(self, name="", my_number=0):
+    def __init__(self, **kwargs):
         """ An initialisation of class instance
         Args:
             my_number (int): integer variable
             name (str): string variable
         """
+        if kwargs is not None:
+            for key, value in kwargs.items():
+                if key is "created_at":
+                    self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                elif key is "updated_at":
+                    self.key = datetime.strptime(value, '%Y-%m-%dT%H:%M:%S.%f')
+                elif key is "__class__":
+                    continue
+                else:
+                    self.key = value
+
         self.id = str(uuid4())
         self.updated_at = datetime.now()
         self.created_at = datetime.now()
