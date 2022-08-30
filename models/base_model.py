@@ -31,7 +31,7 @@ class BaseModel:
                     continue
                 else:
                     self.key = value
-                    
+
         self.id = str(uuid4())
         self.updated_at = datetime.now()
         self.created_at = datetime.now()
