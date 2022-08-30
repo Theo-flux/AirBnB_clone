@@ -25,7 +25,6 @@ class BaseModel:
             created_at: instance creation date/time
             updated_at: instance updates date/time
         Raises:
-
     """
 
     def __init__(self, **kwargs):
