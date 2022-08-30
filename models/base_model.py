@@ -1,9 +1,9 @@
 #!/usr/bin/python3
 
 
-""" Defines class BaseModel
-that defines all common attributes/methods for other
-classes
+"""
+    Module that defines BaseModel class
+    which defines all common attributes/methods for the instances
 """
 
 
@@ -13,14 +13,22 @@ import json
 
 
 class BaseModel:
-    """ A representation of BaseModel class """
+    """
+        BaseModel: BaseModel class
+        Attributes:
+                    id (int): instance id
+                    updated_at (str): date/time of instance update
+                    save(): updates the date/time of instance
+                    to_dict(): create a dict of all the instance attributes
+        Args:
+            id: instance id
+            created_at: instance creation date/time
+            updated_at: instance updates date/time
+        Raises:
+    """
 
     def __init__(self, **kwargs):
-        """ An initialisation of class instance
-        Args:
-            my_number (int): integer variable
-            name (str): string variable
-        """
+        """ An initialisation of class instance """
         if kwargs is not None:
             for key, value in kwargs.items():
                 if key is "created_at":
@@ -31,14 +39,13 @@ class BaseModel:
                     continue
                 else:
                     self.key = value
-
         self.id = str(uuid4())
         self.updated_at = datetime.now()
         self.created_at = datetime.now()
 
     def save(self):
-        """ Updates the public instance attribute
-        with the current datetime
+        """
+            Updates the public instance attribute with the current datetime
         """
         self.updated_at = datetime.now()
 
