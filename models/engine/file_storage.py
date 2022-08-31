@@ -9,7 +9,7 @@
 
 
 import json
-
+from models.base_model import BaseModel
 
 class FileStorage:
     """
@@ -59,5 +59,8 @@ class FileStorage:
         try:
             with open(FileStorage.__file_path) as f:
                 objdict = json.load(f)
+                for k, v in objdict.items():
+                    objdict = v
+                    self.new(eval(objdict["__class__"])(objdict))
         except FileNotFoundError:
             return
