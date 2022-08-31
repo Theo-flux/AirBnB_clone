@@ -3,21 +3,21 @@
 
 """
     Module that defines BaseModel class
-    which defines all common attributes/methods for the instances
+    which defomes all common attributes/methods for the instances
 """
 
 
 from uuid import uuid4
 from datetime import datetime
-import json
+from models import storage
 
 
 class BaseModel:
     """
         BaseModel: BaseModel class
         Attributes:
-                    id (int): instance id
-                    updated_at (str): date/time of instance update
+                    id (uuid4): instance id
+                    updated_at (str/datetime): date/time of instance update
                     save(): updates the date/time of instance
                     to_dict(): create a dict of all the instance attributes
         Args:
@@ -27,8 +27,12 @@ class BaseModel:
         Raises:
     """
 
-    def __init__(self, **kwargs):
-        """ An initialisation of class instance """
+    def __init__(self, *args, **kwargs):
+        """ An initialize a new BaseModel
+            Args:
+                *args (any): Unused.
+                **kwargs (dict): Key/value pairs of attributes.
+        """
         self.id = str(uuid4())
         self.updated_at = datetime.now()
         self.created_at = datetime.now()
@@ -38,6 +42,7 @@ class BaseModel:
             temp1 = kwargs.get("created_at")
             temp2 = kwargs.get("updated_at")
             self.id = kwargs.get("id")
+            # Iso_format_string - '%Y-%m-%dT%H:%M:%S.%f'
             self.created_at = datetime.strptime(temp1, '%Y-%m-%dT%H:%M:%S.%f')
             self.updated_at = datetime.strptime(temp2, '%Y-%m-%dT%H:%M:%S.%f')
             # Only to be added if name/my_number is specified
@@ -45,24 +50,26 @@ class BaseModel:
                 self.name = kwargs.get("name")
             if kwargs.__contains__("my_number"):
                 self.my_number = kwargs.get("my_number")
+        else:
+            storage.new(self)
 
     def save(self):
-        """
-            Updates the public instance attribute with the current datetime
-        """
+        """Update updated_at with the current datetime."""
         self.updated_at = datetime.now()
+        storage.save()
 
     def to_dict(self):
+        """Return the dictionary of the BaseModel instance.
+        Includes the key/value pair __class__ representing
+        the class name of the object.
         """
-            Returns a dictionary containing all keys/values of the instance
-        """
-        toDict = self.__dict__
+        toDict = self.__dict__.copy()
         toDict["created_at"] = self.created_at.isoformat()
         toDict["updated_at"] = self.updated_at.isoformat()
         toDict["__class__"] = self.__class__.__name__
         return toDict
 
     def __str__(self):
-        """ String representation of class """
+        """Return the print/str representation of the BaseModel instance."""
         return "[{}] ({}) {}"\
             .format(self.__class__.__name__, self.id, self.__dict__)
