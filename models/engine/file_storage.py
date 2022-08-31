@@ -51,9 +51,8 @@ class FileStorage:
         """ Serializes __objects to the JSON file """
         new = FileStorage.__objects
         obj_dict = {key: new[key].to_dict() for key in new.keys()}
-        return obj_dict
-        #with open(FileStorage.__file_path, mode="w") as fp:
-            #json.dump(obj_dict, fp)
+        with open(FileStorage.__file_path, mode="w") as fp:
+            json.dump(obj_dict, fp)
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""

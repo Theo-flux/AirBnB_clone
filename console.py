@@ -8,6 +8,7 @@
 
 
 import cmd
+from models.base_model import BaseModel
 
 
 class HBNBCommand(cmd.Cmd):
@@ -25,6 +26,20 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """ Quit command to exit the program """
         return True
+    
+    def do_create(self, args):
+        """ Creates a new instance of a class """
+        if args:
+            if args == "BaseModel":
+                my_model = BaseModel()
+                my_model.name = "Model created from console"
+                my_model.my_number = 102
+                my_model.save()
+                print(my_model.id)
+            else:
+                print("** class name doesn't exist **")
+        else:
+            print("** class name missing **")
 
 
 if __name__ == "__main__":
