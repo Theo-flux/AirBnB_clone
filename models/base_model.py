@@ -9,8 +9,7 @@
 
 from uuid import uuid4
 from datetime import datetime
-from models import storage
-
+import models
 
 class BaseModel:
     """
@@ -50,13 +49,13 @@ class BaseModel:
                 self.name = kwargs.get("name")
             if kwargs.__contains__("my_number"):
                 self.my_number = kwargs.get("my_number")
-        else:
-            storage.new(self)
+        else:        
+            models.storage.new(self)
 
     def save(self):
         """Update updated_at with the current datetime."""
         self.updated_at = datetime.now()
-        storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """Return the dictionary of the BaseModel instance.

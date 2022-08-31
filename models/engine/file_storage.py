@@ -9,7 +9,7 @@
 
 
 import json
-
+from models.base_model import BaseModel
 
 class FileStorage:
     """
@@ -51,14 +51,16 @@ class FileStorage:
         """ Serializes __objects to the JSON file """
         new = FileStorage.__objects
         obj_dict = {key: new[key].to_dict() for key in new.keys()}
-        return obj_dict
-        #with open(FileStorage.__file_path, mode="w") as fp:
-            #json.dump(obj_dict, fp)
+        with open(FileStorage.__file_path, mode="w") as fp:
+            json.dump(obj_dict, fp)
 
     def reload(self):
         """Deserialize the JSON file __file_path to __objects, if it exists."""
         try:
             with open(FileStorage.__file_path) as f:
                 objdict = json.load(f)
+                for k, v in objdict.items():
+                    objdict = v
+                    self.new(eval(objdict["__class__"])(objdict))
         except FileNotFoundError:
             return
