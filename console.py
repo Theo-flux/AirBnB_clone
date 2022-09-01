@@ -10,6 +10,7 @@
 import cmd
 import json
 import models
+import re
 
 BaseModel = models.base_model.BaseModel
 User = models.user.User
@@ -18,6 +19,17 @@ Place = models.place.Place
 City = models.city.City
 Amenity = models.amenity.Amenity
 Review = models.review.Review
+
+
+def find_match(arg):
+    pattern = '^[A-Za-z]+\.[a-z]+\(\)$'
+    result = re.findall(pattern, arg)
+    return result
+    
+
+def split_match(arg):
+    arg = list(arg[0].split("."))
+    return arg
 
 
 class HBNBCommand(cmd.Cmd):
@@ -32,8 +44,28 @@ class HBNBCommand(cmd.Cmd):
         "City",
         "Review"
     ]
+    __short_cut_command_dict = {
+        "all()": "do_all",
+        "create()": "do_create",
+        "show()": "do_show",
+        "destroy()": "do_destroy",
+        "update()": "do_update"
+    }
 
     # ----- basic HBnB commands -----
+    def default(self, line):
+        match = find_match(line)
+        if match != []:
+            match = split_match(match)
+            try:
+                value = HBNBCommand.__short_cut_command_dict[match[1]]
+            except KeyError:
+                print("** unknown command: {}".format(match[1]))
+            else:
+                eval("self.{}('{}')".format(value, match[0]))
+        else:
+            print("** Unknown syntax: {}".format(line))
+
     def emptyline(self):
         pass
 
