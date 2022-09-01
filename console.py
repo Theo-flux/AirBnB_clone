@@ -11,12 +11,15 @@ import cmd
 import json
 import models
 
+
 BaseModel = models.base_model.BaseModel
+User = models.user.User
+
 
 class HBNBCommand(cmd.Cmd):
     """ A representation of HBNBCommand class """
     prompt = "(hbnh) "
-    __model_list = ["BaseModel"]
+    __model_list = ["BaseModel", "User"]
 
     # ----- basic HBnB commands -----
     def emptyline(self):
