@@ -18,6 +18,9 @@ class TestBaseModel(unittest.TestCase):
     """ Test cases """
     bm1 = BaseModel()
     bm2 = BaseModel()
+    up1 = bm1.updated_at
+    bm1.save()
+    up2 = bm1.updated_at
 
     def test_isinstance(self):
         """ Test isinstance of BaseModel """
@@ -37,11 +40,7 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         """ Test save method """
-        bm1 = BaseModel()
-        up1 = bm1.updated_at
-        bm1.save()
-        up2 = bm1.updated_at
-        self.assertNotEqual(up1, up2)
+        self.assertNotEqual(self.up1, self.up2)
 
     def test_to_dict(self):
         """ Test to_dict method """
