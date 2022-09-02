@@ -16,15 +16,24 @@ import unittest
 
 class TestBaseModel(unittest.TestCase):
     """ Test cases """
+    bm1 = BaseModel()
+    bm2 = BaseModel()
 
-    def test_id(self):
-        """ Test id """
-        bm1 = BaseModel()
-        bm2 = BaseModel()
-        self.assertIsInstance(bm1, BaseModel)
-        self.assertTrue(hasattr(bm1, "id"))
-        self.assertNotEqual(bm1.id, bm2.id)
-        self.assertIsInstance(bm1.id, str)
+    def test_isinstance(self):
+        """ Test isinstance of BaseModel """
+        self.assertIsInstance(self.bm1, BaseModel)
+
+    def test_id_present(self):
+        """ Test if id attr is present """
+        self.assertTrue(hasattr(self.bm1, "id"))
+
+    def test_id_uniqueness(self):
+        """ Test if two instance id is not equal """
+        self.assertNotEqual(self.bm1.id, self.bm2.id)
+
+    def test_id_isstr(self):
+        """ Test if id is a string """
+        self.assertIsInstance(self.bm1.id, str)
 
     def test_save(self):
         """ Test save method """
