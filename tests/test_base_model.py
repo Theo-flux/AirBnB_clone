@@ -9,6 +9,7 @@
             to_dict()
 """
 from models.base_model import BaseModel
+from datetime import datetime
 import unittest
 
 
@@ -38,6 +39,14 @@ class TestBaseModel(unittest.TestCase):
     def test_id_isstr(self):
         """ Test if id is a string """
         self.assertIsInstance(self.bm1.id, str)
+
+    def test_created_at(self):
+        """ Test if created_at is a string """
+        self.assertIsInstance(self.bm1.created_at, datetime)
+
+    def test_updated_at(self):
+        """ Test if updated_at is a string """
+        self.assertIsInstance(self.bm1.updated_at, datetime)
 
     def test_save(self):
         """ Test save method """
