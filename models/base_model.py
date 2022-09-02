@@ -11,6 +11,7 @@ from uuid import uuid4
 from datetime import datetime
 import models
 
+
 class BaseModel:
     """
         BaseModel: BaseModel class
@@ -49,7 +50,7 @@ class BaseModel:
                 self.name = kwargs.get("name")
             if kwargs.__contains__("my_number"):
                 self.my_number = kwargs.get("my_number")
-        else:        
+        else:
             models.storage.new(self)
 
     def save(self):
