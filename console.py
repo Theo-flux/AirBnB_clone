@@ -59,7 +59,8 @@ class HBNBCommand(cmd.Cmd):
     # ----- basic HBnB commands -----
     def default(self, line):
         match = find_match(line)
-
+        print(match)
+        """
         if match:
             match = split_match(match)
             if len(match) > 1: 
@@ -79,7 +80,7 @@ class HBNBCommand(cmd.Cmd):
                     eval("self.{}()".format(value))
         else:
             print("** Unknown syntax: {}".format(line))
-  
+        """
 
     def emptyline(self):
         pass
