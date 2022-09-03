@@ -49,8 +49,10 @@ class HBNBCommand(cmd.Cmd):
         "create()": "do_create",
         "show()": "do_show",
         "destroy()": "do_destroy",
-        "update()": "do_update"
+        "update()": "do_update",
+        "count()": "count"
     }
+
 
     # ----- basic HBnB commands -----
     def default(self, line):
@@ -130,7 +132,6 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id\n
         (usage: destroy <classname> <id>)
@@ -158,7 +159,7 @@ class HBNBCommand(cmd.Cmd):
                             dict_key = key
 
                     if dict_key != "":
-                        print(dict_key)
+                        #print(dict_key)
                         del obj_dict[dict_key]
 
                         with open("file.json", mode="w") as fp:
@@ -195,7 +196,13 @@ class HBNBCommand(cmd.Cmd):
             with open("file.json", mode="r") as fp:
                 obj_dict = json.load(fp)
             print(obj_dict)
-
+    
+    def count(self, args):
+        """ Counts number of instances of a class """
+        res = self.do_all(args)
+        
+        if isinstance(res, dict):
+            print(len(res))
 
     def do_update(self, args):
         """ Update an instance based ob the class name and id\n
@@ -228,24 +235,25 @@ class HBNBCommand(cmd.Cmd):
                         if update_dict["2"]:
                             if update_dict["3"]:
                                 for key, value in obj_dict.items():
-                                    if value["id"] == update_dict["1"]:
+
+if value["id"] == update_dict["1"]:
                                         attr = update_dict["2"]
                                         value[attr] = update_dict["3"]
-                                print(obj_dict)
+                                return(obj_dict)
                                 with open("file.json", mode="w") as fp:
                                     json.dump(obj_dict, fp)
                             else:
-                                print("** value missing **")
+                                return("** value missing **")
                         else:
-                            print("** attribute name missing **")
+                            return("** attribute name missing **")
                     else:
-                        print("** no instance found **")
+                        return("** no instance found **")
                 else:
-                    print("** instance id missing **")
+                    return("** instance id missing **")
             else:
-                print("** class doesn't exist **")
+                return("** class doesn't exist **")
         else:
-            print("** class name missing **")
+            return("** class name missing **")
 
 
 if __name__ == "__main__":
