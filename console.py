@@ -12,6 +12,8 @@ import json
 import models
 import re
 
+
+storage = models.storage
 BaseModel = models.base_model.BaseModel
 User = models.user.User
 State = models.state.State
@@ -22,7 +24,7 @@ Review = models.review.Review
 
 
 def find_match(arg):
-    pattern = '^[A-Za-z]+\.[a-z]+\(\)$'
+    pattern = '^[A-Za-z]*\.?[a-z]+\(\)$'
     result = re.findall(pattern, arg)
     return result
     
@@ -57,16 +59,27 @@ class HBNBCommand(cmd.Cmd):
     # ----- basic HBnB commands -----
     def default(self, line):
         match = find_match(line)
-        if match != []:
+
+        if match:
             match = split_match(match)
-            try:
-                value = HBNBCommand.__short_cut_command_dict[match[1]]
-            except KeyError:
-                print("** unknown command: {}".format(match[1]))
-            else:
-                eval("self.{}('{}')".format(value, match[0]))
+            if len(match) > 1: 
+                try:
+                    value = HBNBCommand.__short_cut_command_dict[match[1]]
+                except KeyError:
+                    print("** unknown command: {}".format(match[1]))
+                else:
+                    eval("self.{}('{}')".format(value, match[0]))
+            
+            elif len(match) == 1:
+                try:
+                    value = HBNBCommand.__short_cut_command_dict[match[0]]
+                except KeyError:
+                    print("** unknown command: {}".format(match[0]))
+                else:
+                    eval("self.{}()".format(value))
         else:
             print("** Unknown syntax: {}".format(line))
+  
 
     def emptyline(self):
         pass
@@ -125,7 +138,7 @@ class HBNBCommand(cmd.Cmd):
                         print(res)
                     else:
                         print("** no instance found **")
-                else:
+                else: 
                     print("** instance id missing **")
             else:
                 print("** class doesn't exist **")
@@ -173,7 +186,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_all(self, args):
+    def do_all(self, args=""):
         """ Prints all string representation of all instances\n
         based or not on the class name.\n
         (usage: all BaseModel or all)
@@ -197,12 +210,28 @@ class HBNBCommand(cmd.Cmd):
                 obj_dict = json.load(fp)
             print(obj_dict)
     
-    def count(self, args):
-        """ Counts number of instances of a class """
-        res = self.do_all(args)
-        
-        if isinstance(res, dict):
-            print(len(res))
+    def count(self, args=""):
+        """ Counts number of instances of a class\n
+        (usage: <class name>.count()
+        """
+        obj_dict = {}
+        obj_dict_by_model = {}
+        if args:
+            if args in HBNBCommand.__model_list:
+                with open("file.json", mode="r") as fp:
+                    obj_dict = json.load(fp)
+                
+                for key, value in obj_dict.items():
+                    if value["__class__"] == args:
+                        obj_dict_by_model[key] = value
+                print(len(obj_dict_by_model))
+
+            else:
+                print("** class doesn't exist **")
+        else:
+            with open("file.json", mode="r") as fp:
+                obj_dict = json.load(fp)
+            print(len(obj_dict))
 
     def do_update(self, args):
         """ Update an instance based ob the class name and id\n
@@ -236,24 +265,24 @@ class HBNBCommand(cmd.Cmd):
                             if update_dict["3"]:
                                 for key, value in obj_dict.items():
 
-if value["id"] == update_dict["1"]:
+                                    if value["id"] == update_dict["1"]:
                                         attr = update_dict["2"]
                                         value[attr] = update_dict["3"]
-                                return(obj_dict)
+                                print(obj_dict)
                                 with open("file.json", mode="w") as fp:
                                     json.dump(obj_dict, fp)
                             else:
-                                return("** value missing **")
+                                print("** value missing **")
                         else:
-                            return("** attribute name missing **")
+                            print("** attribute name missing **")
                     else:
-                        return("** no instance found **")
+                        print("** no instance found **")
                 else:
-                    return("** instance id missing **")
+                    print("** instance id missing **")
             else:
-                return("** class doesn't exist **")
+                print("** class doesn't exist **")
         else:
-            return("** class name missing **")
+            print("** class name missing **")
 
 
 if __name__ == "__main__":
