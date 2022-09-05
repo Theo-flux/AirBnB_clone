@@ -27,16 +27,18 @@ def find_match(arg):
     pattern = '^[A-Za-z]*\.?[a-z]+\([\"0-9a-f-\"]*\)$'
     result = re.findall(pattern, arg)
     return result
-    
+
 
 def split_match(arg):
     arg = list(arg[0].split("."))
     return arg
 
+
 def find_inner_match(arg):
     pattern = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
     result = re.findall(pattern, arg[1])
     return result
+
 
 class HBNBCommand(cmd.Cmd):
     """ A representation of HBNBCommand class """
@@ -59,7 +61,6 @@ class HBNBCommand(cmd.Cmd):
         "count()": "count"
     }
 
-
     # ----- basic HBnB commands -----
     def default(self, line):
         match = find_match(line)
@@ -71,14 +72,14 @@ class HBNBCommand(cmd.Cmd):
             print("----------")
             print(find_inner_match(match))
             if len(match) > 1:
-               
+
                 try:
                     value = HBNBCommand.__short_cut_command_dict[match[1]]
                 except KeyError:
                     print("** unknown command: {}".format(match[1]))
                 else:
                     eval("self.{}('{}')".format(value, match[0]))
-            
+
             elif len(match) == 1:
                 try:
                     value = HBNBCommand.__short_cut_command_dict[match[0]]
@@ -88,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
                     eval("self.{}()".format(value))
         else:
             print("** Unknown syntax: {}".format(line))
-        
+
     def emptyline(self):
         pass
 
@@ -99,7 +100,7 @@ class HBNBCommand(cmd.Cmd):
     def do_quit(self, arg):
         """ Quit command to exit the program """
         return True
-    
+
     def do_create(self, args):
         """ Creates a new instance of BaseModel\n
         (usage: create <classname>)
@@ -114,7 +115,7 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
         else:
             print("** class name missing **")
-    
+
     def do_show(self, args):
         """ Prints the string representation of an instance\n
         based on the class name and id\n
@@ -124,14 +125,14 @@ class HBNBCommand(cmd.Cmd):
         obj_dict = {}
         res = {}
         i = 0
-        
+
         if args:
             args = list(args.split(" "))
 
             while i < len(args):
                 show_dict[str(i)] = args[i]
                 i += 1
-            
+
             if show_dict["0"] in HBNBCommand.__model_list:
                 if show_dict["1"]:
                     with open("file.json", mode="r") as fp:
@@ -146,7 +147,7 @@ class HBNBCommand(cmd.Cmd):
                         print(res)
                     else:
                         print("** no instance found **")
-                else: 
+                else:
                     print("** instance id missing **")
             else:
                 print("** class doesn't exist **")
@@ -157,19 +158,19 @@ class HBNBCommand(cmd.Cmd):
         """ Deletes an instance based on the class name and id\n
         (usage: destroy <classname> <id>)
         """
-        
+
         show_dict = {"0": "", "1": ""}
         obj_dict = {}
         dict_key = ""
         i = 0
-        
+
         if args:
             args = list(args.split(" "))
 
             while i < len(args):
                 show_dict[str(i)] = args[i]
                 i += 1
-            
+
             if show_dict["0"] in HBNBCommand.__model_list:
                 if show_dict["1"]:
                     with open("file.json", mode="r") as fp:
@@ -180,11 +181,10 @@ class HBNBCommand(cmd.Cmd):
                             dict_key = key
 
                     if dict_key != "":
-                        #print(dict_key)
                         del obj_dict[dict_key]
 
                         with open("file.json", mode="w") as fp:
-                            json.dump(obj_dict ,fp)                        
+                            json.dump(obj_dict, fp)
                     else:
                         print("** no instance found **")
                 else:
@@ -205,7 +205,7 @@ class HBNBCommand(cmd.Cmd):
             if args in HBNBCommand.__model_list:
                 with open("file.json", mode="r") as fp:
                     obj_dict = json.load(fp)
-                
+
                 for key, value in obj_dict.items():
                     if value["__class__"] == args:
                         obj_dict_by_model[key] = value
@@ -217,7 +217,7 @@ class HBNBCommand(cmd.Cmd):
             with open("file.json", mode="r") as fp:
                 obj_dict = json.load(fp)
             print(obj_dict)
-    
+
     def count(self, args=""):
         """ Counts number of instances of a class\n
         (usage: <class name>.count()
@@ -228,7 +228,7 @@ class HBNBCommand(cmd.Cmd):
             if args in HBNBCommand.__model_list:
                 with open("file.json", mode="r") as fp:
                     obj_dict = json.load(fp)
-                
+
                 for key, value in obj_dict.items():
                     if value["__class__"] == args:
                         obj_dict_by_model[key] = value
@@ -251,14 +251,14 @@ class HBNBCommand(cmd.Cmd):
         dict_key = ""
         res = {}
         i = 0
-        
+
         if args:
             args = list(args.split(" "))
 
             while i < len(args):
                 update_dict[str(i)] = args[i]
                 i += 1
-            
+
             if update_dict["0"] in HBNBCommand.__model_list:
                 if update_dict["1"]:
                     with open("file.json", mode="r") as fp:

@@ -36,7 +36,7 @@ class FileStorage:
                 nothing. If the file doesn't exist, no exception should be
                 raised)
     """
-    
+
     __file_path = "file.json"
     __objects = {}
 
@@ -49,9 +49,9 @@ class FileStorage:
         <obj_class_name>.id
         """
         ocname = obj.__class__.__name__
-        
-        #creating a key from concatenating class name and id
-        #setting the key, value of the class __objects attribute
+
+        # creating a key from concatenating class name and id
+        # setting the key, value of the class __objects attribute
         FileStorage.__objects["{}.{}".format(ocname, obj.id)] = obj
 
     def save(self):

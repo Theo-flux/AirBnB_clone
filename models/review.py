@@ -19,7 +19,7 @@ class Review(BaseModel):
                     text (str): instance text
         Raises:
     """
-    
+
     place_id = ""
     user_id = ""
     text = ""
