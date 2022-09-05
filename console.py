@@ -24,7 +24,7 @@ Review = models.review.Review
 
 
 def find_match(arg):
-    pattern = '^[A-Za-z]*\.?[a-z]+\([\"0-9a-f-\"]*\)$'
+    pattern = '^[A-Za-z]*.?[a-z]+\([\"0-9a-f-\"]*\)$'
     result = re.findall(pattern, arg)
     return result
 
@@ -64,13 +64,13 @@ class HBNBCommand(cmd.Cmd):
     # ----- basic HBnB commands -----
     def default(self, line):
         match = find_match(line)
-        print(match)
+        # print(match)
         if match:
             match = split_match(match)
-            print("--split--")
-            print(match)
-            print("----------")
-            print(find_inner_match(match))
+            # print("--split--")
+            # print(match)
+            # print("----------")
+            # print(find_inner_match(match))
             if len(match) > 1:
 
                 try:
@@ -121,6 +121,7 @@ class HBNBCommand(cmd.Cmd):
         based on the class name and id\n
         (usage: show <classname> <id>)
         """
+        # key 0 conatins the classname key 1 contains the id
         show_dict = {"0": "", "1": ""}
         obj_dict = {}
         res = {}
@@ -208,15 +209,17 @@ class HBNBCommand(cmd.Cmd):
 
                 for key, value in obj_dict.items():
                     if value["__class__"] == args:
-                        obj_dict_by_model[key] = value
-                print(obj_dict_by_model)
-
+                        res = eval(value["__class__"])(**value)
+                        print(res)
             else:
                 print("** class doesn't exist **")
         else:
             with open("file.json", mode="r") as fp:
                 obj_dict = json.load(fp)
-            print(obj_dict)
+
+            for value in obj_dict.values():
+                res = eval(value["__class__"])(**value)
+                print(res)
 
     def count(self, args=""):
         """ Counts number of instances of a class\n
