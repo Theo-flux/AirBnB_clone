@@ -94,16 +94,16 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_EOF(self, args):
-        """ EOF command to exit the program """
+        """ EOF command to exit the program\n"""
         return True
 
     def do_quit(self, arg):
-        """ Quit command to exit the program """
+        """ Quit command to exit the program\n"""
         return True
 
     def do_create(self, args):
         """ Creates a new instance of BaseModel\n
-        (usage: create <classname>)
+        (usage: create <classname>)\n
         """
 
         if args:
@@ -119,7 +119,7 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, args):
         """ Prints the string representation of an instance\n
         based on the class name and id\n
-        (usage: show <classname> <id>)
+        (usage: show <classname> <id>)\n
         """
         # key 0 conatins the classname key 1 contains the id
         show_dict = {"0": "", "1": ""}
@@ -157,7 +157,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_destroy(self, args):
         """ Deletes an instance based on the class name and id\n
-        (usage: destroy <classname> <id>)
+        (usage: destroy <classname> <id>)\n
         """
 
         show_dict = {"0": "", "1": ""}
@@ -198,7 +198,7 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args=""):
         """ Prints all string representation of all instances\n
         based or not on the class name.\n
-        (usage: all BaseModel or all)
+        (usage: all BaseModel or all)\n
         """
         obj_dict = {}
         obj_dict_by_model = {}
@@ -223,7 +223,7 @@ class HBNBCommand(cmd.Cmd):
 
     def count(self, args=""):
         """ Counts number of instances of a class\n
-        (usage: <class name>.count()
+        (usage: <class name>.count()\n
         """
         obj_dict = {}
         obj_dict_by_model = {}
@@ -246,8 +246,8 @@ class HBNBCommand(cmd.Cmd):
 
     def do_update(self, args):
         """ Update an instance based ob the class name and id\n
-        by adding or updating attribute\n
-        (usage: update <class name> <id> <attribute name> "<attribute value>")
+        by adding or updating attribute (usage: update <class name>\
+        <id> <attribute name> "<attribute value>")\n
         """
         update_dict = {"0": "", "1": "", "2": "", "3": ""}
         obj_dict = {}
