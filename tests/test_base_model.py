@@ -41,11 +41,11 @@ class TestBaseModel(unittest.TestCase):
         self.assertIsInstance(self.bm1.id, str)
 
     def test_created_at(self):
-        """ Test if created_at is a string """
+        """ Test if created_at is a datetime object """
         self.assertIsInstance(self.bm1.created_at, datetime)
 
     def test_updated_at(self):
-        """ Test if updated_at is a string """
+        """ Test if updated_at is a datetime object """
         self.assertIsInstance(self.bm1.updated_at, datetime)
 
     def test_save(self):
