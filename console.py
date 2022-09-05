@@ -24,8 +24,8 @@ Review = models.review.Review
 
 
 def find_match(arg):
-    pattern = '^[A-Za-z]*.?[a-z]+\([\"0-9a-f-\"]*\)$'
-    result = re.findall(pattern, arg)
+    pattern = '^[A-Za-z]*.?[a-z]+\\([\"0-9a-f-\"]*\\)$'
+    result = re.findall(r'{}'.format(pattern), arg)
     return result
 
 
