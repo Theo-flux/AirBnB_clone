@@ -68,6 +68,6 @@ class FileStorage:
                 objdict = json.load(f)
                 for k, v in objdict.items():
                     objdict = v
-                    self.new(eval(objdict["__class__"])(objdict))
+                    self.new(eval(objdict["__class__"])(**objdict))
         except FileNotFoundError:
             return
