@@ -24,7 +24,7 @@ Review = models.review.Review
 
 
 def find_match(arg):
-    pattern = '^[A-Za-z]*\.?[a-z]+\(\)$'
+    pattern = '^[A-Za-z]*\.?[a-z]+\([\"0-9a-f-\"]*\)$'
     result = re.findall(pattern, arg)
     return result
     
@@ -33,6 +33,10 @@ def split_match(arg):
     arg = list(arg[0].split("."))
     return arg
 
+def find_inner_match(arg):
+    pattern = '[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+    result = re.findall(pattern, arg[1])
+    return result
 
 class HBNBCommand(cmd.Cmd):
     """ A representation of HBNBCommand class """
@@ -60,10 +64,14 @@ class HBNBCommand(cmd.Cmd):
     def default(self, line):
         match = find_match(line)
         print(match)
-        """
         if match:
             match = split_match(match)
-            if len(match) > 1: 
+            print("--split--")
+            print(match)
+            print("----------")
+            print(find_inner_match(match))
+            if len(match) > 1:
+               
                 try:
                     value = HBNBCommand.__short_cut_command_dict[match[1]]
                 except KeyError:
@@ -80,8 +88,7 @@ class HBNBCommand(cmd.Cmd):
                     eval("self.{}()".format(value))
         else:
             print("** Unknown syntax: {}".format(line))
-        """
-
+        
     def emptyline(self):
         pass
 
