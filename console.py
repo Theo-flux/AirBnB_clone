@@ -95,15 +95,15 @@ class HBNBCommand(cmd.Cmd):
         pass
 
     def do_EOF(self, args):
-        """ EOF command to exit the program\n"""
+        """EOF command to exit the program\n"""
         return True
 
     def do_quit(self, arg):
-        """ Quit command to exit the program\n"""
+        """Quit command to exit the program\n"""
         return True
 
     def create(self, args):
-        """ Creates a new instance of BaseModel\n
+        """Creates a new instance of BaseModel\n
         (usage: create <classname>)\n
         """
 
@@ -118,7 +118,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def show(self, args):
-        """ Prints the string representation of an instance\n
+        """Prints the string representation of an instance\n
         based on the class name and id\n
         (usage: show <classname> <id>)\n
         """
@@ -157,7 +157,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def destroy(self, args):
-        """ Deletes an instance based on the class name and id\n
+        """Deletes an instance based on the class name and id\n
         (usage: destroy <classname> <id>)\n
         """
 
@@ -197,7 +197,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
 
     def all(self, args=""):
-        """ Prints all string representation of all instances\n
+        """Prints all string representation of all instances\n
         based or not on the class name.\n
         (usage: all BaseModel or all)\n
         """
@@ -223,7 +223,7 @@ class HBNBCommand(cmd.Cmd):
                 print(res)
 
     def count(self, args=""):
-        """ Counts number of instances of a class\n
+        """Counts number of instances of a class\n
         (usage: <class name>.count()\n
         """
         obj_dict = {}
@@ -246,7 +246,7 @@ class HBNBCommand(cmd.Cmd):
             print(len(obj_dict))
 
     def update(self, args):
-        """ Update an instance based ob the class name and id\n
+        """Update an instance based ob the class name and id\n
         by adding or updating attribute (usage: update <class name>\
         <id> <attribute name> "<attribute value>")\n
         """
