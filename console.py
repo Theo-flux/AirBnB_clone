@@ -62,6 +62,7 @@ class HBNBCommand(cmd.Cmd):
     }
 
     # ----- basic HBnB commands -----
+    """
     def default(self, line):
         match = find_match(line)
         # print(match)
@@ -89,7 +90,7 @@ class HBNBCommand(cmd.Cmd):
                     eval("self.{}()".format(value))
         else:
             print("** Unknown syntax: {}".format(line))
-
+    """
     def emptyline(self):
         pass
 
@@ -101,7 +102,7 @@ class HBNBCommand(cmd.Cmd):
         """ Quit command to exit the program\n"""
         return True
 
-    def do_create(self, args):
+    def create(self, args):
         """ Creates a new instance of BaseModel\n
         (usage: create <classname>)\n
         """
@@ -116,7 +117,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_show(self, args):
+    def show(self, args):
         """ Prints the string representation of an instance\n
         based on the class name and id\n
         (usage: show <classname> <id>)\n
@@ -155,7 +156,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_destroy(self, args):
+    def destroy(self, args):
         """ Deletes an instance based on the class name and id\n
         (usage: destroy <classname> <id>)\n
         """
@@ -195,7 +196,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             print("** class name missing **")
 
-    def do_all(self, args=""):
+    def all(self, args=""):
         """ Prints all string representation of all instances\n
         based or not on the class name.\n
         (usage: all BaseModel or all)\n
@@ -244,7 +245,7 @@ class HBNBCommand(cmd.Cmd):
                 obj_dict = json.load(fp)
             print(len(obj_dict))
 
-    def do_update(self, args):
+    def update(self, args):
         """ Update an instance based ob the class name and id\n
         by adding or updating attribute (usage: update <class name>\
         <id> <attribute name> "<attribute value>")\n
