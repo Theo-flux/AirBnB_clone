@@ -79,7 +79,9 @@ h4 {
     display: block;
 }
 
-
+ul > li {
+    margin-bottom: 10px;
+}
 
 li {
     list-style: none;
