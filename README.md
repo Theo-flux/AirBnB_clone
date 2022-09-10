@@ -49,4 +49,3 @@ The console will be a tool to validate this storage engine
 
 ## References
 1. [Python strftime cheatsheet](https://strftime.org/)
-

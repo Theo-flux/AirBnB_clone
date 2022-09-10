@@ -71,4 +71,3 @@ class FileStorage:
                     self.new(eval(objdict["__class__"])(**objdict))
         except FileNotFoundError:
             return
-
