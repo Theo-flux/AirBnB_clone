@@ -1,5 +1,6 @@
 .places {
-    margin-bottom: 60px
+    margin-bottom: 60px;
+    z-index: 1;
 }
 
 .places h1 {
@@ -22,6 +23,12 @@
     border-radius: 4px;
     display: flex;
     flex-direction: column;
+}
+
+@media screen and (max-width: 320px) {
+    .articles-wrapper article {
+        width: 250px;
+    }
 }
 
 .places article h2 {
